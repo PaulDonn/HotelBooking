@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="WaracleHotelBooking.Tests/WaracleHotelBooking.Tests.csproj" />
+  <Project Path="WaracleHotelBooking/WaracleHotelBooking.csproj" />
+</Solution>

@@ -1,0 +1,6 @@
+@WaracleHotelBooking_HostAddress = http://localhost:5168
+
+GET {{WaracleHotelBooking_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
