@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace WaracleHotelBooking.Models
+namespace WaracleHotelBooking.DataModel.Models
 {
     [ExcludeFromCodeCoverage]
     public class Hotel

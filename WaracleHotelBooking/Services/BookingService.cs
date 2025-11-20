@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using WaracleHotelBooking.Data;
-using WaracleHotelBooking.Models;
+using WaracleHotelBooking.DataModel.Data;
+using WaracleHotelBooking.DataModel.Models;
 
 namespace WaracleHotelBooking.Services
 {

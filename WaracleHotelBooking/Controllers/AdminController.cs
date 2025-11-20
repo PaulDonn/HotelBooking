@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WaracleHotelBooking.Data;
+using WaracleHotelBooking.DataModel.Data;
 
 namespace WaracleHotelBooking.Controllers
 {

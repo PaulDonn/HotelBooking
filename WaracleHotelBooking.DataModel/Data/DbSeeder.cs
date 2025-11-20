@@ -1,7 +1,7 @@
 ﻿using System;
-using WaracleHotelBooking.Models;
+using WaracleHotelBooking.DataModel.Models;
 
-namespace WaracleHotelBooking.Data
+namespace WaracleHotelBooking.DataModel.Data
 {
     public static class DbSeeder
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WaracleHotelBooking.Data;
+using WaracleHotelBooking.DataModel.Data;
 
 namespace WaracleHotelBooking.Controllers
 {

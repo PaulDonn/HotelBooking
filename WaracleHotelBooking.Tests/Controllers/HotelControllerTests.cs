@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.CodeAnalysis;
 using WaracleHotelBooking.Controllers;
 using WaracleHotelBooking.DTOs;
-using WaracleHotelBooking.Models;
+using WaracleHotelBooking.DataModel.Models;
 using WaracleHotelBooking.Services;
 using WaracleHotelBooking.Tests.Utils;
 

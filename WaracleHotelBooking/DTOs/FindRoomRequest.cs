@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using WaracleHotelBooking.Models;
+using WaracleHotelBooking.DataModel.Models;
 
 namespace WaracleHotelBooking.DTOs
 {

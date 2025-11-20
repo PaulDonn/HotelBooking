@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
-using WaracleHotelBooking.Data;
+using WaracleHotelBooking.DataModel.Data;
 using WaracleHotelBooking.Services;
 
 var builder = WebApplication.CreateBuilder(args);

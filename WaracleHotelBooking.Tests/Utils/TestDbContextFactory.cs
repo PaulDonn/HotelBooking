@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics.CodeAnalysis;
-using WaracleHotelBooking.Data;
+using WaracleHotelBooking.DataModel.Data;
 
 namespace WaracleHotelBooking.Tests.Utils;
 

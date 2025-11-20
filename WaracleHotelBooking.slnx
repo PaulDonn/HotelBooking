@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="WaracleHotelBooking.DataModel/WaracleHotelBooking.DataModel.csproj" />
   <Project Path="WaracleHotelBooking.Tests/WaracleHotelBooking.Tests.csproj" />
   <Project Path="WaracleHotelBooking/WaracleHotelBooking.csproj" />
 </Solution>

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WaracleHotelBooking.Data;
+using WaracleHotelBooking.DataModel.Data;
 using WaracleHotelBooking.DTOs;
-using WaracleHotelBooking.Models;
+using WaracleHotelBooking.DataModel.Models;
 using WaracleHotelBooking.Services;
 
 namespace WaracleHotelBooking.Controllers
