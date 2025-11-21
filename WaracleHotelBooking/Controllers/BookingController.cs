@@ -108,7 +108,7 @@ namespace WaracleHotelBooking.Controllers
                 return NotFound();
             }
 
-            if(booking.StartDate >= DateTime.Now.Date)
+            if(booking.StartDate <= DateTime.Now.Date)
             {
                 return BadRequest($"Bookings may not be deleted after their start date.");
             }
