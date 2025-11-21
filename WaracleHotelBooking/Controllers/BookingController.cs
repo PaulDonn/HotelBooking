@@ -25,27 +25,27 @@ namespace WaracleHotelBooking.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBooking([FromBody] CreateBookingRequest req)
         {
-            if (req.EndDate <= req.StartDate)
+            if (req.EndDate.Date <= req.StartDate.Date)
                 return BadRequest("End date must be after start date.");
 
-            var roomAvailability = await _svc.CheckRoomAvailability(req.RoomId, req.StartDate, req.EndDate, req.Guests);
+            var roomAvailability = await _svc.CheckRoomAvailability(req.RoomId, req.StartDate.Date, req.EndDate.Date, req.Guests);
             if (!roomAvailability)
             {
                 return BadRequest("Room not available.");
             }
 
-            var booking = await _svc.CreateBooking(req.RoomId, req.StartDate, req.EndDate, req.Guests);
+            var booking = await _svc.CreateBooking(req.RoomId, req.StartDate.Date, req.EndDate.Date, req.Guests);
             return Ok(booking);
         }
 
         [HttpPost("FindAvailableRooms")]
         public async Task<IActionResult> FindAvailableRooms([FromBody] FindRoomRequest req)
         {
-            if (req.EndDate <= req.StartDate)
+            if (req.EndDate.Date <= req.StartDate.Date)
                 return BadRequest("End date must be after start date.");
 
 
-            var rooms = await _svc.GetAvailableRooms(req.HotelId, req.RoomType, req.StartDate, req.EndDate, req.Guests);
+            var rooms = await _svc.GetAvailableRooms(req.HotelId, req.RoomType, req.StartDate.Date, req.EndDate.Date, req.Guests);
             var maxCapacity = rooms.Sum(r => r.Capacity);
             if (rooms == null || !rooms.Any() || maxCapacity < req.Guests) //No rooms available to meet the specifications
                 return BadRequest("No rooms available.");
