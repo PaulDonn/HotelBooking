@@ -13,7 +13,7 @@ The API hosted at https://waracle-hotelbooking-api.azurewebsites.net/swagger/ind
 -The solution is hosted in an Azure App Service and makes uses of an Azure SQL Database. 
 -The app service and database are on basic/free tier plans. Performance could be improved with more standard plans.
 
-//CI/CD
+//CI CD
 - This repo is a mirror of a repo in Azure DevOps. That repo is part of a build and release pipeline for easy and reliable deployment.
 
 //Sample data
