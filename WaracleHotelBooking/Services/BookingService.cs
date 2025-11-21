@@ -56,5 +56,19 @@ namespace WaracleHotelBooking.Services
             await _db.SaveChangesAsync();
             return booking;
         }
+
+        public async Task<bool> DeleteBooking(Booking booking)
+        {
+            try
+            {
+                _db.Bookings.Remove(booking);
+                await _db.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

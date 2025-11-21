@@ -30,6 +30,25 @@ namespace WaracleHotelBooking.Tests.Controllers
             result.Should().BeOfType<BadRequestObjectResult>();
         }
 
+        [Fact]
+        public async Task CreateBooking_ReturnsBadRequest_WhenStartDateBeforeToday()
+        {
+            var db = TestDbContextFactory.CreateContext();
+            var controller = new BookingController(db, new BookingService(db));
+
+            var today = DateTime.Now;
+            var request = new CreateBookingRequest(
+                RoomId: db.Rooms.First().Id,
+                StartDate: today.AddDays(-1),
+                EndDate: today.AddDays(3),
+                Guests: 1
+            );
+
+            var result = await controller.CreateBooking(request);
+
+            result.Should().BeOfType<BadRequestObjectResult>();
+        }
+
 
         [Fact]
         public async Task CreateBooking_ReturnsBadRequest_WhenRoomNotAvailable()
@@ -161,6 +180,26 @@ namespace WaracleHotelBooking.Tests.Controllers
                 RoomType: null,
                 StartDate: new DateTime(2025, 12, 12),
                 EndDate: new DateTime(2025, 12, 11),
+                Guests: 1
+            );
+
+            var result = await controller.FindAvailableRooms(request);
+
+            result.Should().BeOfType<BadRequestObjectResult>();
+        }
+
+        [Fact]
+        public async Task FindAvailableRooms_ReturnsBadResult_WhenStartDateBeforeToday()
+        {
+            var db = TestDbContextFactory.CreateContext();
+            var controller = new BookingController(db, new BookingService(db));
+
+            var today = DateTime.Now;
+            var request = new FindRoomRequest(
+                HotelId: db.Hotels.First().Id,
+                RoomType: null,
+                StartDate: today.AddDays(-1),
+                EndDate: today.AddDays(3),
                 Guests: 1
             );
 

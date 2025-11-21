@@ -28,6 +28,9 @@ namespace WaracleHotelBooking.Controllers
             if (req.EndDate.Date <= req.StartDate.Date)
                 return BadRequest("End date must be after start date.");
 
+            if (req.StartDate.Date < DateTime.Now.Date)
+                return BadRequest("Bookings may not be created before today's date.");
+
             var roomAvailability = await _svc.CheckRoomAvailability(req.RoomId, req.StartDate.Date, req.EndDate.Date, req.Guests);
             if (!roomAvailability)
             {
@@ -43,6 +46,9 @@ namespace WaracleHotelBooking.Controllers
         {
             if (req.EndDate.Date <= req.StartDate.Date)
                 return BadRequest("End date must be after start date.");
+
+            if (req.StartDate.Date < DateTime.Now.Date)
+                return BadRequest("Bookings may not be created before today's date.");
 
 
             var rooms = await _svc.GetAvailableRooms(req.HotelId, req.RoomType, req.StartDate.Date, req.EndDate.Date, req.Guests);
@@ -73,7 +79,30 @@ namespace WaracleHotelBooking.Controllers
         public async Task<IActionResult> GetBooking(string reference)
         {
             var booking = await _db.Bookings.FirstOrDefaultAsync(b => b.BookingReference == reference);
-            return booking is null ? NotFound() : Ok(booking);
+            return booking == null ? NotFound() : Ok(booking);
+        }
+
+        [HttpDelete("{reference}")]
+        public async Task<IActionResult> DeleteBooking(string reference)
+        {
+            var booking = await _db.Bookings.FirstOrDefaultAsync(b => b.BookingReference == reference);
+
+            if(booking == null)
+            {
+                return NotFound();
+            }
+
+            if(booking.StartDate >= DateTime.Now.Date)
+            {
+                return BadRequest($"Bookings may not be deleted after their start date.");
+            }
+
+            if(!await _svc.DeleteBooking(booking))
+            {
+                return BadRequest($"Booking {reference} could not be deleted.");
+            }
+
+            return Ok();
         }
     }
 }
