@@ -2,7 +2,9 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-latest'
+  name: LocalPool
+  demands:
+  - agent.name -equals local-agent-01
 
 variables:
   buildConfiguration: 'Release'
