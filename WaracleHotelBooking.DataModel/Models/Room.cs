@@ -6,6 +6,7 @@ namespace WaracleHotelBooking.DataModel.Models
     public class Room
     {
         public Guid Id { get; set; }
+        public required string Name { get; set; }
         public Guid HotelId { get; set; }
         public RoomType RoomType { get; set; }
         public int Capacity { get; set; }

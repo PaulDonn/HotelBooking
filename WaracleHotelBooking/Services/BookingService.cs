@@ -32,15 +32,25 @@ namespace WaracleHotelBooking.Services
 
         public async Task<Booking> CreateBooking(Guid roomId, DateTime start, DateTime end, int guests)
         {
+            var hotel = await _db.Hotels.SingleAsync(h => h.Rooms.Any(r => r.Id == roomId));
+            var uniqueRef = string.Empty;
+            while(string.IsNullOrEmpty(uniqueRef))
+            {
+                var bookingRef = hotel.BookingRefPrefix + Guid.NewGuid().ToString()[..8].ToUpper(); //collision possible with substring of guid as booking ref
+                if(!_db.Bookings.Any(b => b.BookingReference == bookingRef))
+                {
+                    uniqueRef = bookingRef;
+                }
+            }
+
             var booking = new Booking
             {
                 RoomId = roomId,
                 StartDate = start,
                 EndDate = end,
                 Guests = guests,
-                BookingReference = Guid.NewGuid().ToString()[..8].ToUpper(),
+                BookingReference = uniqueRef,
             };
-
 
             _db.Bookings.Add(booking);
             await _db.SaveChangesAsync();

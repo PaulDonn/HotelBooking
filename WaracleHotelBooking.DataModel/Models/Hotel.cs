@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WaracleHotelBooking.DataModel.Models
 {
@@ -6,8 +7,9 @@ namespace WaracleHotelBooking.DataModel.Models
     public class Hotel
     {
         public Guid Id { get; set; }
-        public string Name { get; set; } = string.Empty;
+        
+        public required string Name { get; set; }
+        public required string BookingRefPrefix { get; set; }
         public List<Room> Rooms { get; set; } = new();
-        public string BookingRefPrefix = string.Empty;
     }
 }
