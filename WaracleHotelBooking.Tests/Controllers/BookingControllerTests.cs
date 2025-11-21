@@ -49,6 +49,89 @@ namespace WaracleHotelBooking.Tests.Controllers
             result.Should().BeOfType<BadRequestObjectResult>();
         }
 
+
+        [Fact]
+        public async Task CreateBooking_ReturnsBadRequest_WhenRoomDoubleBooked()
+        {
+            var db = TestDbContextFactory.CreateContext();
+            var controller = new BookingController(db, new BookingService(db));
+
+            var request = new CreateBookingRequest(
+                RoomId: db.Rooms.First().Id,
+                StartDate: new DateTime(2025, 12, 12),
+                EndDate: new DateTime(2025, 12, 14),
+                Guests: 1
+            );
+
+            var result = await controller.CreateBooking(request);
+
+            result.Should().BeOfType<OkObjectResult>();
+
+            result = await controller.CreateBooking(request);
+
+            result.Should().BeOfType<BadRequestObjectResult>();
+        }
+
+
+        [Fact]
+        public async Task CreateBooking_ReturnsBadRequest_WhenOnlyPartiallyAvailable_1()
+        {
+            var db = TestDbContextFactory.CreateContext();
+            var controller = new BookingController(db, new BookingService(db));
+
+            var request1 = new CreateBookingRequest(
+                RoomId: db.Rooms.First().Id,
+                StartDate: new DateTime(2025, 12, 13),
+                EndDate: new DateTime(2025, 12, 14),
+                Guests: 1
+            );
+
+            var result = await controller.CreateBooking(request1);
+
+            result.Should().BeOfType<OkObjectResult>();
+
+            var request2 = new CreateBookingRequest(
+                RoomId: db.Rooms.First().Id,
+                StartDate: new DateTime(2025, 12, 12),
+                EndDate: new DateTime(2025, 12, 14),
+                Guests: 1
+            );
+
+            result = await controller.CreateBooking(request2);
+
+            result.Should().BeOfType<BadRequestObjectResult>();
+        }
+
+
+        [Fact]
+        public async Task CreateBooking_ReturnsBadRequest_WhenOnlyPartiallyAvailable_2()
+        {
+            var db = TestDbContextFactory.CreateContext();
+            var controller = new BookingController(db, new BookingService(db));
+
+            var request1 = new CreateBookingRequest(
+                RoomId: db.Rooms.First().Id,
+                StartDate: new DateTime(2025, 12, 12),
+                EndDate: new DateTime(2025, 12, 13),
+                Guests: 1
+            );
+
+            var result = await controller.CreateBooking(request1);
+
+            result.Should().BeOfType<OkObjectResult>();
+
+            var request2 = new CreateBookingRequest(
+                RoomId: db.Rooms.First().Id,
+                StartDate: new DateTime(2025, 12, 12),
+                EndDate: new DateTime(2025, 12, 14),
+                Guests: 1
+            );
+
+            result = await controller.CreateBooking(request2);
+
+            result.Should().BeOfType<BadRequestObjectResult>();
+        }
+
         [Fact]
         public async Task CreateBooking_ReturnsOk_WhenRoomAvailable()
         {
