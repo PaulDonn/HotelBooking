@@ -14,7 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-options.UseInMemoryDatabase("HotelBookingDb"));
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+//options.UseInMemoryDatabase("HotelBookingDb"));
 
 
 builder.Services.AddScoped<BookingService>();
