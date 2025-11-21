@@ -12,6 +12,10 @@ namespace WaracleHotelBooking.Controllers
         public HotelController(AppDbContext db) => _db = db;
 
 
+        /// <summary>
+        /// Gets a list of hotel records by name
+        /// </summary>
+        /// <returns>A list of hotel records.</returns>
         [HttpGet]
         public async Task<IActionResult> GetHotels([FromQuery] string name)
         {

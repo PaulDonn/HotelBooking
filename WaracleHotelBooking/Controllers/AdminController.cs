@@ -11,6 +11,9 @@ namespace WaracleHotelBooking.Controllers
         public AdminController(AppDbContext db) => _db = db;
 
 
+        /// <summary>
+        /// Resets the DB
+        /// </summary>
         [HttpPost("reset")]
         public IActionResult Reset()
         {
@@ -19,6 +22,9 @@ namespace WaracleHotelBooking.Controllers
         }
 
 
+        /// <summary>
+        /// Seeds the DB
+        /// </summary>
         [HttpPost("seed")]
         public IActionResult Seed()
         {

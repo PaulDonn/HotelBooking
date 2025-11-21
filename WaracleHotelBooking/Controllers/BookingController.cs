@@ -4,6 +4,7 @@ using WaracleHotelBooking.DataModel.Data;
 using WaracleHotelBooking.DTOs;
 using WaracleHotelBooking.DataModel.Models;
 using WaracleHotelBooking.Services;
+using Azure;
 
 namespace WaracleHotelBooking.Controllers
 {
@@ -21,7 +22,9 @@ namespace WaracleHotelBooking.Controllers
             _svc = svc;
         }
 
-
+        /// <summary>
+        /// Creates a booking record
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> CreateBooking([FromBody] CreateBookingRequest req)
         {
@@ -41,6 +44,11 @@ namespace WaracleHotelBooking.Controllers
             return Ok(booking);
         }
 
+
+        /// <summary>
+        /// Finds all rooms with availability between set dates and returns them ordered by suitability
+        /// </summary>
+        /// <returns>A list of rooms.</returns>
         [HttpPost("FindAvailableRooms")]
         public async Task<IActionResult> FindAvailableRooms([FromBody] FindRoomRequest req)
         {
@@ -75,6 +83,10 @@ namespace WaracleHotelBooking.Controllers
         }
 
 
+        /// <summary>
+        /// Gets a booking record by Booking Reference
+        /// </summary>
+        /// <returns>A booking record.</returns>
         [HttpGet("{reference}")]
         public async Task<IActionResult> GetBooking(string reference)
         {
@@ -82,6 +94,10 @@ namespace WaracleHotelBooking.Controllers
             return booking == null ? NotFound() : Ok(booking);
         }
 
+
+        /// <summary>
+        /// Deletes a booking record by Booking reference
+        /// </summary>
         [HttpDelete("{reference}")]
         public async Task<IActionResult> DeleteBooking(string reference)
         {
